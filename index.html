@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body></body>
+  <script>
+    class Program {
+      #programName
+      #programCode
+      #programLength
+      constructor(programName, programCode, programLength) {
+        this.#programName = programName
+        this.programCode = programCode
+        this.programLength = programLength
+      }
+      get _programName() {
+        return this.#programName
+      }
+      set _programName(pName) {
+        this.#programName = pName
+      }
+      get _programCode() {
+        return this.#programCode
+      }
+      set _programCode(pCode) {
+        this.#programCode = pCode
+      }
+      get programLength() {
+        return this.#programLength
+      }
+      set programLength(pLength) {
+        this.#programLength = pLength
+      }
+      display() {
+        return "Program name is: " + this.#programName;
+      }
+    }
+    class Course extends Program{
+        #courseName;
+        #courseTeacher;
+        constructor(programName, programCode, programLength, courseName, courseTeacher){
+                try {
+                    super(programName, programCode, programLength);
+                    if(courseName == undefined || courseName == "") throw "Course Name should not be empty!";
+                    else this.#courseName = courseName;
+                    if(courseTeacher == undefined || courseTeacher == "") throw "Course Name should not be empty!";
+                    else this.#courseTeacher = courseTeacher;
+                }catch(err) {
+                    alert(err);
+                }
+            }
+        display(){
+            return super.display() + "Course name is : " + this.#courseName;
+        }
+    }
+    class Student {
+      // property name
+      constructor(firstName, lastName, grades, courseName) {
+        this.firstName = firstName
+        this.lastName = lastName
+        this.grades = grades
+        this.courseName = courseName
+      }
+      avg() {
+        let sum = 0
+        for (let grade of this.grades) {
+          sum += grade
+        }
+        return sum / this.grades.length
+      }
+      maximum() {
+        let max = this.grades[0]
+        for (let grade of this.grades) {
+          if (max < grade) {
+            max = grade
+          }
+        }
+      }
+      minimum() {
+        let min = this.grades[0]
+        for (let grade of this.grades)
+          if (min > grade) {
+            min = grade
+          }
+      }
+    }
+    try{
+        let linwen = new Student("Linwen", "tseng", [80, 90, 70], "html");
+        let mamiko = new Student("Mamiko", "Sugai", [80, 90, 70], "css");
+        let henry = new Student("Henry", "Hitak", [80, 90, 70], "jquery");
+        let HTML = new Course ("Web Development ", 1002, "1 year", "","Lin");
+
+        console.log(HTML,display());
+    }
+    catch(err) {
+        console.log(err.message);
+    }finally{
+        console.log ("hello");
+    }
+    // let linwen = new Student("Linwen", "tseng", [80, 90, 70], "html")
+    // let mamiko = new Student("Mamiko", "Sugai", [80, 90, 70], "css")
+    // let henry = new Student("Henry", "Hitak", [80, 90, 70], "jquery")
+    // let HTML = new Course ("Web Development ", 1002, "1 year", "HTML","Lin")
+    // let webdev = new Program("Web development", 1002, "1 Year")
+    // console.log(HTML.display())
+  </script>
+</html>

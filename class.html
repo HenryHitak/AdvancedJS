@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Program{
+        #programName;
+        #programCode;
+        #programLength;
+        constructor(programName, programCode, programLength){
+            this.#programName = programName;
+            this.#programCode = programCode;
+            this.#programLength = programLength;
+        }
+        get ProgramName(){
+            return this.#programName;
+        }
+        set ProgramName(pName){
+            this.#programName = pName;
+        }
+        display(){
+            return "Program name is: " + this.#programName;
+        }
+    }
+    class Course extends Program{
+        #courseName;
+        #courseTeacher;
+        constructor(programName, programCode, programLength, courseName, courseTeacher){
+            try{
+                super(programName,programCode,programLength);
+                if(courseName==undefined || courseName=="") throw "Course Name should not be empty!";
+                else this.#courseName = courseName;
+                if(courseTeacher==undefined || courseTeacher=="") throw "Course teacher should not be empty!";
+                else this.#courseTeacher = courseTeacher;
+            }catch(err){
+                alert(err);
+            }
+        }
+        display(){
+            return super.display() + " Course name is: " + this.#courseName;
+        }
+    }
+    class Student{
+        constructor(firstName,lastName,grades,courseName){
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.grades = grades;
+            this.courseName = courseName;
+        }
+        avg(){
+            let sum = 0;
+            for(let grade of this.grades){
+                sum += grade;
+            }
+            return sum/this.grades.length;
+        }
+        max(){
+            let max = this.grades[0];
+            for(let grade of this.grades){
+                if(max < grade){
+                    max = grade;
+                }
+            }
+            return max;
+        }
+        min(){
+            let min = this.grades[0];
+            for(let grade of this.grades){
+                if(min > grade){
+                    min = grade;
+                }
+            }
+            return min;
+        }
+    }
+    try{
+        let linwen = new Student("Lin-Wen","Tseng",[80,75,60],"HTML");
+        let Jose = new Student("Jose","Luis",[75,50,90],"CSS");
+        let HTML = new Course("WebDevelopment",1002,"1 year","","Lin");
+        console.log(HTML);
+        
+    }catch(err){
+        console.log(err.message);
+    }finally{
+        console.log("hello");
+    }
+    
+</script>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    let data = '{"id":1,"first_name":"Rosie","last_name":"Dodshon"}';
+    let lastname = "";
+    let obj = JSON.parse(data);//convert a string to an object or array of an objects
+    console.log(obj.last_name);
+    let studentobj = [
+    {name:"Mamiko",family:"Akane",country:"Japan"},
+    {name:"april",family:"Jose",country:"Korea"}
+    ]
+    let StringData = JSON.stringify(studentobj); //convert an object or array of objects to a string
+    console.log(StringData);
+    async function loadJson(){
+    let ajaxPromise = new promise ((resolve,reject)=>{
+        let req = new XMLHttpRequest();
+        req.open("GET","./data.json");
+        req.onload = () =>{
+            if(req.status==200){
+                resolve(req.responseText);
+            }else{
+                reject(req.statusText0);
+            }
+        };
+        req.send();
+    })
+    populate(await ajaxPromise);
+    }
+    loadJson().then(
+        ()=>{},
+        (reason)=>{alert(reason);}
+    )
+</script>
+</html>

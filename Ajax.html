@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2></h2>
+    <button type="button">Load</button>
+</body>
+<script>
+    // let button = document.getElementsByTagName("button")[0];
+    // button.addEventListener("click",load);
+    // function load(){
+    //     let xhttp = new XMLHttpRequest();
+    //     xhttp.onload = function(){
+    //         console.log(this);
+    //         document.getElementsByTagName("h2")[0].innerHTML = this.responseText;
+    //     }
+    //     xhttp.open("GET","./names.txt",true);
+    //     xhttp.send();
+    //     button.innerHTML = "close";
+    // }
+    let button = document.getElementsByTagName("button")[0];
+    let h2 = document.getElementsByTagName("h2")[0];
+    let loadFile = new Promise ((resolve,reject)=>{
+        let xhttpReq = new XMLHttpRequest();
+        xhttpReq.open("GET","./names.txt",true); // if file is in wrong way - 404 not found msg will show up;
+        xhttpReq.onload = () => { // always with open and onload 
+            if (xhttpReq.status == 200){
+                resolve(xhttpReq.responseText);
+            }else {
+                reject(xhttpReq.statusText);
+            }
+        }
+        xhttpReq.send();
+    });
+    loadFile.then (
+        (value) => {h2.innerHTML = value},
+        (value) => {alert(value);}
+    )
+    
+</script>
+</html>

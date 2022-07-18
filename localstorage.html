@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Welcome: </h2>
+    <!-- <button type="button">Clear</button> -->
+    <input type="text" placeholder="Name">
+    <input type="text" placeholder="Family">
+    <input type="text" placeholder="Country">
+    <button type="button">Store</button>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+<script>
+    let h2 = document.getElementsByTagName('h2')[0];
+    // let btnclear = document.getElementsByTagName('button')[0];
+    let strbtn = document.getElementsByTagName('button')[0];
+    let inputs = document.getElementsByTagName('input')[0];
+    let inputss = document.getElementsByTagName('input')[1];
+    let inputsss = document.getElementsByTagName('input')[2];
+    // localStorage.setItem("Name","Mamiko");//will store a data until JS clear the data
+    // sessionStorage.setItem("Family","April");//will store a data until the end of the current session
+    // console.log(localStorage.getItem("Name"));
+    // console.log(localStorage.length);
+    // btnclear.addEventListener("click",()=>{
+    //     localStorage.clear();
+    //     localStorage.removeItem("");
+    // })
+    // let welcome = ()=>{
+    //     if(localStorage.getItem("Name")!=null){
+    //         h2.innerHTML += localStorage.getItem("Name");
+    //     }else{
+    //         h2.innerHTML += "guest";
+    //     }
+    // }
+    // welcome();
+    strbtn.addEventListener("click",() => {
+        localStorage.setItem(inputs.value,inputss.value,inputsss.value);
+    })
+        let welcome = ()=>{
+        if(localStorage.getItem(inputs.value)!=null){
+            h2.innerHTML += localStorage.getItem(inputs.value);
+        }else{
+            h2.innerHTML += "guest";
+        }
+    }
+    welcome();
+    //create a page with 3 inputs
+    //1. name
+    //2. family
+    //3. country
+    //Then when user cliked on the store button, store the informationon the localstrg.
+    //You code should be able to display a welcome message using the name of the user which has been stored in the localstorg(name)
+    //and it should be able to display a table using the users info strd on the localstge.
+
+</script>
+</html>

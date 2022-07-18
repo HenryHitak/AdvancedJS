@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // let badlist = ["marvel","thor","groot","iron"]
+    // let goodlist = ["bat","super","aqua","queen"]
+    // let friends = new Promise (function (good,bad){
+    //     let friend = "marvel";
+    //     for(let goods of goodlist){
+    //         if(goods == friend){
+    //             good("I like "+ goods);
+    //         }
+    //     }
+    //     for(let bads of badlist){
+    //         if(bads == friend){
+    //         bad("I hate " + bads);
+    //     };
+    // }
+    // });
+    // friends.then(
+    //     function(value){alert(value);},
+    //     function(value){alert(value);}
+    // );
+    let JSPromise = new Promise (function (myResolve,myReject){
+    let badlist = ["marvel","thor","groot","iron"]
+    let goodlist = ["bat","super","aqua","queen"]
+    let name = "x";
+    if(goodlist.includes(name)){
+        myResolve("I like "+ name);
+    }else if(badlist.includes(name)){
+        myReject("I hate" + name);
+    }else{
+        myReject("I don't know "+ name);
+    }
+    });
+    JSPromise.then(
+        function(value){alert(value);},
+        function(value){alert(value);}
+    );
+
+</script>
+</html>

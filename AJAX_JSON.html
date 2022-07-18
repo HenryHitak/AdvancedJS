@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jquery-3.6.0.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>Last Name</th>
+            </tr>
+        </thead>
+    <tbody>
+        
+    </tbody>
+</table>
+</body>
+<script>
+    // let ajaxloader = new Promise((resolve,reject)=>{
+    //     let req = new XMLHttpRequest();
+    //     req.open("GET","./data.json",true);
+    //     req.onload = ()=>{
+    //         if(req.status==200){
+    //             resolve(req.responseText);
+    //         }else{
+    //             reject(req.statusText);
+    //         }
+    //     }
+    //     req.send();
+    // })
+    // ajaxloader.then(
+    //     (value)=>{
+    //     // let obj = JSON.stringify(value);
+    //     let obj = JSON.parse(value);
+    //     populate(obj);
+    //         $.each(obj,function(index,value){
+    //         let tr = $("<tr></tr>");
+    //         let button = $("<button>Click me</button>");
+    //         $.each(value,function(i,v){
+    //             let td = $("<td></td>");
+    //             td.text(v);
+    //             tr.append(td);
+    //             tr.append(button);
+    //         })
+    //         $('tbody').append(tr);
+    //         // $('tbody').append(button);
+    //     })
+    //     console.log(obj);
+    //     },
+    //     (value)=>{alert(value)}
+    // );
+    let populate = (data)=>{
+        let tbody = document.getElementsByTagName("tbody")[0];
+        let datas = JSON.parse(data)
+        for (let obj of datas){
+            let tr = document.createElement('tr');
+            for (let prop in obj){
+                let td = document.createElement("td");
+                td.innerText = obj[prop];
+                tr.appendChild(td);
+            }
+            tbody.appendChild(tr);
+        }
+    }
+    async function loadJson(){
+    let ajaxPromise = new Promise ((resolve,reject)=>{
+        let req = new XMLHttpRequest();
+        req.open("GET","./data.json");
+        req.onload = () =>{
+            if(req.status==200){
+                resolve(req.responseText);
+            }else{
+                reject(req.statusText0);
+            }
+        };
+        req.send();
+    })
+    populate(await ajaxPromise);
+    }
+    loadJson().then(
+        ()=>{},
+        (reason)=>{alert(reason);}
+    )
+    
+</script>
+</html>

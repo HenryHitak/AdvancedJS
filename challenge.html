@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function sum(arrayNum){
+        let result = 0;
+        for (let  number of arrayNum){
+            result += number
+        }
+        return result;
+    };
+    function sub(arrayNum){
+        let result = arrayNum[0];
+        for (let  number of arrayNum){
+            result -= number
+        }
+        return result;
+    };
+    console.log(sub([5,2]));
+</script>
+</html>

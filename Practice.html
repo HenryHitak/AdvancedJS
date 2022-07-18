@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    class Purchase{
+        #invoiceNumber;
+        #saleAmount;
+        #numberOfItems;
+        constructor(invoiceNumber,saleAmount,numberOfItems){
+            try{
+                if(invoiceNumber>=1000 && invoiceNumber<=9000){
+                    this.#invoiceNumber = invoiceNumber;
+                    this.#saleAmount = saleAmount;
+                    this.#numberOfItems = numberOfItems;
+                }else{
+                    throw "Invalid invoice number";
+                }
+            }catch(err){
+                alert(err);
+            }
+        }
+        get InvoiceNumber(){
+            return this.#invoiceNumber;
+        }
+        get SaleAmount(){
+            return this.#saleAmount;
+        }
+        get NumberOfItems(){
+            return this.#numberOfItems;
+        }
+        set InvoiceNumber(number){
+            this.#invoiceNumber = number;
+        }
+        set SaleAmount(price){
+            this.#saleAmount = price;
+        }
+        tax(){
+            let total = this.#numberOfItems * this.#saleAmount;
+            return total + (total*0.05);
+        }
+        CalculateShippingCost(){
+            if (this.#numberOfItems < 3) return this.tax() + 3.5;
+            else if (this.#numberOfItems>=3 && this.#numberOfItems<=6) return this.tax() + 5;
+            else if(this.#numberOfItems>=7 && this.#numberOfItems<=10) return this.tax() + 7;
+            else if(this.#numberOfItems>10) return this.tax() + 10;
+        }
+        display(){
+            return "Invoice#: " + this.#invoiceNumber +" Sales Amount: "+this.#saleAmount + "Number of items: "+this.#numberOfItems + "Total: " + this.CalculateShippingCost();
+        }
+    }
+    let purchase1 = new Purchase(1000,10,5);
+    console.log(purchase1.display());
+</script>
+</html>

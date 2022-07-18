@@ -1,0 +1,7 @@
+071422
+
+sync vs async - Alyce
+
+sync - works step by step.it does not finish if the other task is not completed.
+
+async - has different order to load the page. task before it finishes.

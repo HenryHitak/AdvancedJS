@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>
+
+    </h1>
+    <!-- <p id="something">
+
+    </p> -->
+</body>
+<script>
+    // let h1 = document.getElementsByTagName("h1")[0];
+    // let p = document.getElementById("something");
+    // function Display (output){
+    //     p.innerText = output;
+    // }
+    // function DisplayH1 (output){
+    //     h1.innerText = output;
+    // }
+    // function sum(num1, num2, callbackfunction1, callbackfunction2){
+    //     let result = num1 + num2;
+    //     callbackfunction1(result); // displayH1(result)
+    //     callbackfunction2(result);// display(result)
+    // }
+    // sum(10,20,DisplayH1,Display);
+    let H1 = document.getElementsByTagName("h1")[0];
+    let numbers = [1,2,3,4,5,6,7,8,9];
+    function mainFunction(sum,sub,multi,div,arrayNum,operator){
+        let result =0;
+        switch(operator){
+            case "+":
+                result = sum(arrayNum);
+                break;
+            case "-":
+                result = sub(arrayNum);
+                break;
+            case "*":
+                result = multi(arrayNum);
+                break;
+            case "/":
+                result = div(arrayNum);
+                break;
+        }
+        H1.innerHTML =result;  
+    };
+    function sum(arrayNum){
+        let result = 0;
+        for (let  number of numbers){
+            result += number
+        }
+    };
+    function sub(arrayNum){
+        let result = 0;
+        for(let number of numbers){
+            result -= number
+        }
+    };
+    function multi(arrayNum){
+        let result = 0;
+        for(let number of numbers){
+            result *= number
+        }
+    };
+    function div(arrayNum){
+        let result = 0;
+        for(let number of numbers){
+            result/=number
+        }
+    };
+    
+    
+
+</script>
+</html>
