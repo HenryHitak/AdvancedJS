@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- create a loginform with username and password inputs and a checkbox with this label "remember me".
+    when the page has loaded, first check if the username cookie exists or not. If it does, then display it in the username inputbox.
+    when userclikced on the login button, if the mentioned checkbox has been checked, store the username in the cookie with 4 day expiration. -->
+
+    <form action="#" method="post">
+    <label for="uname">User Name:</label><br>
+    <input id="uname" type="text" value="" placeholder="User Name"><br>
+    <label for="password">Password:</label><br>
+    <input id="password" type="password" value="" placeholder="Password"><br>
+    <input type="checkbox" id="chk"> <label for="chk">remember me</label> <br>
+    <button type="button">Submit</button>
+    </form> 
+    
+</body>
+<script>
+    let setCookie = (CookieName, CookieValue, Exp)=>{
+        const currentTime = new Date();
+        currentTime.setTime(currentTime.getTime()+(Exp*24*60*60*1000));
+        let Cookie_Exp = "expires="+currentTime.toUTCString();
+        document.cookie = " " + CookieName + "="+ CookieValue  + ";"+Cookie_Exp;
+    };
+    let getCookie = (CookieName) =>{
+        let cookieKey = CookieName+"=";
+        let cookies = decodeURIComponent(document.cookie);
+        let cookieArray = cookies.split(";");
+        for(let cookie of cookieArray){
+            while(cookie.charAt(0) == "  "){
+                cookie = cookie.substring(1);
+            }
+            if(cookie.indexOf(cookieKey)==0){
+                return cookie.substring(cookieKey.length);
+            }
+        }
+        return "";
+    }
+    setCookie("color", "red$&");
+    let usernameChecker = () =>{
+        let username = getCookie("username");
+        if(username!=""){
+            usernameInput.value = username;
+        }
+    }
+    let usernameInput = document.getElementsByTagName("input")[0];
+    let checkbox = document.getElementsByTagName("input")[2];
+    let btnLogin = document.getElementsByTagName("button")[0];
+    usernameChecker();
+    btnLogin.addEventListener("click",()=>{
+        if(checkbox.checked){
+            setCookie("username",usernameInput.value,4);
+        }
+    })
+</script>
+</html>
