@@ -27,7 +27,7 @@
 </body>
 <script>
     // let ajaxloader = new Promise((resolve,reject)=>{
-    //     let req = new XMLHttpRequest();
+    //     let req = new HttpRequest();
     //     req.open("GET","./data.json",true);
     //     req.onload = ()=>{
     //         if(req.status==200){
@@ -64,17 +64,15 @@
         let datas = JSON.parse(data)
         for (let obj of datas){
             let tr = document.createElement('tr');
-            for (let prop in obj){
-                let td = document.createElement("td");
-                td.innerText = obj[prop];
-                tr.appendChild(td);
-            }
+            let td = document.createElement("td");
+            td.innerText = obj[prop];
+            tr.appendChild(td);
             tbody.appendChild(tr);
         }
     }
     async function loadJson(){
     let ajaxPromise = new Promise ((resolve,reject)=>{
-        let req = new XMLHttpRequest();
+        let req = new HttpRequest();
         req.open("GET","./data.json");
         req.onload = () =>{
             if(req.status==200){
@@ -89,7 +87,7 @@
     }
     loadJson().then(
         ()=>{},
-        (reason)=>{alert(reason);}
+        ()=>{}
     )
     
 </script>

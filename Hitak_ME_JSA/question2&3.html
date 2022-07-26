@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body ng-app="firstApp">
+    <div ng-controller="firstCtrl">
+        <div>
+            <input type="text" ng-model="bookName">
+            <input type="text" ng-model="bookAuth">
+            <input type="text" ng-model="bookCoun">
+            <button type="button" ng-click="btnClick()">Add</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <td>
+                        Books
+                    </td>
+                    <td>
+                        writer
+                    </td>
+                    <td>
+                        Country
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td ng-bind="books"></td>
+                    <td ng-bind="writer"></td>
+                    <td ng-bind="country"></td>
+                </tr>
+                <tr>
+                    <td ng-repeat="st in funbookArray">
+                        <li>{{st.obj.bookss}}</li>
+                        <li>{{st.obj.author}}</li>
+                        <li>{{st.obj.countries}}</li>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    class favbook { //creating var to store the data
+        constructor(bookss, author, countries) {
+            this.bookss = bookss;
+            this.author = author;
+            this.countries = countries;
+        }
+
+    }
+    let angularApp = angular.module('firstApp',[]);
+    angularApp.controller('firstCtrl',function($scope){
+        $scope.books = "football";
+        $scope.writer = "Jose";
+        $scope.country = "Korea";
+        $scope.funbook = new Map();
+        $scope.btnClick1 = () =>{
+        let funbookArray = new favbook(bookName,$scope.bookAuth,$scope.bookCoun); // list to put the value in side of the map and set.
+        $scope.updateArray = () =>{
+            $scope.funbookArray = Array.from($scope.bookss,([id,obj])=>({id,obj}));
+        }
+        $scope.updateArray();
+        $scope.btnClick = () =>{
+            $scope.funbook.set(bookss,funbookArray);
+            $scope.updateArray();
+            $scope.studentName = "";
+            $scope.grade = "";
+        }
+    }
+    })
+</script>
+</html>

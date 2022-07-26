@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<style>
+    table {
+        padding: 2%;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        width: 100px;
+        text-align: center;
+    }
+</style>
+
+<body>
+    <div ng-app="myApp">
+        <div ng-controller="repeatCtrl">
+            <input type="text" placeholder="Write Employee Name" ng-model="employeeName" />
+            <input type="text" placeholder="Write Employee Department" ng-model="employeeDepartment" />
+            <input type="text" placeholder="Write Employee Position" ng-model="employeePosition" />
+            <input type="text" placeholder="Write Employee Salary" ng-model="employeeSalary" />
+            <button type="button" ng-click="btnAdd()">Add</button>
+            <button type="button" ng-click="btnClear()">Clear</button>
+            <h2></h2>
+            <h2></h2>
+            <h2></h2>
+            <h2></h2>
+            <select name=""></select>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Position</th>
+                        <th>Salary</th>
+                        <th>AT</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="value in employeeObj">
+                        <td>{{value.id}}</td>
+                        <td>{{value.name}}</td>
+                        <td>{{value.department}}</td>
+                        <td>{{value.position}}</td>
+                        <td>{{value.salary}}</td>
+                        <td>{{value.tax}}</td>
+                    </tr>
+                    <!-- <tr ng-repeat="value in empArray">
+                        <td>{{value.obj.id}}</td>
+                        <td>{{value.obj.name}}</td>
+                        <td>{{value.obj.department}}</td>
+                        <td>{{value.obj.position}}</td>
+                        <td>{{value.obj.salary}}</td>
+                    </tr> -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    let employeeObj = [];
+    let id = 1000;
+    let sum = 0;
+    class employee {
+        constructor(id, name, department, position, salary, tax) {
+            this.id = id;
+            this.name = name;
+            this.department = department;
+            this.position = position;
+            this.salary = salary;
+            this.tax = tax;
+        }
+    }
+    let myApp = angular.module('myApp', []);
+    myApp.controller('repeatCtrl', ($scope) => {
+        // $scope.emp = new Map();
+        $scope.btnAdd = () => {
+            let tax = CalTax($scope.employeeSalary);
+            let list = new employee(id, $scope.employeeName, $scope.employeeDepartment, $scope.employeePosition, $scope.employeeSalary, tax);
+            employeeObj.push(list);
+            $scope.employeeObj = employeeObj;
+            console.log($scope.employeeObj);
+            // $scope.emp.set(id,list);
+            // $scope.updateArray = () =>{
+            //     $scope.empArray = Array.from($scope.emp,([id,obj])=>({id,obj}));
+            // }
+            // $scope.updateArray();
+            setCookie(id, $scope.employeeName, 4);
+            sumCal($scope.employeeSalary);
+            max($scope.employeeSalary);
+            min($scope.employeeSalary);
+            id++;
+        }
+        $scope.btnClear = () => {
+            $scope.employeeName = "";
+            $scope.employeeDepartment = "";
+            $scope.employeePosition = "";
+            $scope.employeeSalary = "";
+        }
+    })
+    let setCookie = (Cookieid, CookieName, Exp) => {
+        const currentTime = new Date(); // get the current time
+        currentTime.setTime(currentTime.getTime() + (Exp * 24 * 60 * 60 * 1000));
+        let Cookie_Exp = "expires=" + currentTime.toUTCString();
+        document.cookie = Cookieid + "=" + CookieName + ";" + Cookie_Exp;
+    }
+    let sumCal = (data) => {
+        sum += parseInt(data);
+        let avg = sum / employeeObj.length
+        document.getElementsByTagName("h2")[0].innerHTML = "AVG:" + avg.toFixed(2);
+    }
+    let salarylist = [];
+    let maxvalue = 0;
+    let minvalue = 100000000;
+    let max = (data)=>{
+        salarylist.push(parseInt(data));
+
+        for(let value of salarylist){
+            if(maxvalue < value){
+                maxvalue = value;
+            }
+        }
+        document.getElementsByTagName("h2")[1].innerHTML = "MAX:" +  maxvalue;
+    }
+    let min = (data)=>{
+        salarylist.push(parseInt(data));
+        for(let value of salarylist){
+            if(minvalue > value){
+                minvalue = value;
+            }
+        }
+        document.getElementsByTagName("h2")[2].innerHTML = "MIN:" +  minvalue;
+    }
+    let taxlist = [];
+    let CalTax = (data)=>{
+        let dataa = parseInt(data)
+        dataa += dataa*0.05;
+        taxlist.push(dataa);
+        return dataa
+    }
+</script>
+
+</html>

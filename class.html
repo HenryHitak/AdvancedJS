@@ -7,7 +7,18 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    hello
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
 </body>
 <script>
     class Program{
@@ -44,7 +55,7 @@
             }
         }
         display(){
-            return super.display() + " Course name is: " + this.#courseName;
+            return super.display() + " Course name is: " + this.#courseName + max();
         }
     }
     class Student{
@@ -83,14 +94,17 @@
     try{
         let linwen = new Student("Lin-Wen","Tseng",[80,75,60],"HTML");
         let Jose = new Student("Jose","Luis",[75,50,90],"CSS");
-        let HTML = new Course("WebDevelopment",1002,"1 year","","Lin");
+        let HTML = new Course("WebDevelopment",1002,"1 year","Empty","Lin");
         console.log(HTML);
-        
+        let td = document.createElement("td");
+        td.innerText = (HTML.ProgramName);
+        let tbody = document.getElementsByTagName('tbody')[0];
+        tbody.append(td)
     }catch(err){
         console.log(err.message);
     }finally{
         console.log("hello");
     }
-    
+
 </script>
 </html>

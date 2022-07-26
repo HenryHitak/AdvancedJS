@@ -8,13 +8,13 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
-    <div ng-app="firstApp">
+    <!-- <div ng-app="firstApp">
         <div ng-controller="repeatCtrl">
-        <!-- <ul>
+        <ul>
             <li ng-repeat="student in students">
                 Name:{{student.name}} Garde:{{student.grade}}
             </li>
-        </ul> -->
+        </ul>
         <input type="text" ng-model="nameSearch"/>
         <table>
             <thead>
@@ -43,16 +43,19 @@
         <h1 ng-bind="displayCristTask('Rocha')"></h1>
         <h3>{{displayCristTask('Rocha2')}}</h3>
         </div>
-    </div>
-    <div ng-app="myApp">
+    </div> -->
+   <div ng-app="myApp">
         <div ng-controller="repeatCtrl">
+            <input type="text" ng-model="studentName"/>
+            <input type="text" ng-model="grade"/>
+            <button type="button" ng-click="btnClick()">Add</button>
             <ul>
-                <li ng-repeat="(key,value) in student | orderBy:value">
+                <li ng-repeat="(key,value) in student">
                     {{key}}:{{value}}
                 </li>
             </ul>
             <ul>
-                <li ng-repeat="st in students">
+                <li ng-repeat="st in studentsArray">
                     {{st.name}}:{{st.course}}
                 </li>
             </ul>
@@ -60,39 +63,50 @@
     </div>
 </body>
 <script>
-    let angularApp = angular.module('firstApp',[]);
-    angularApp.controller('repeatCtrl',($scope)=>{
-        $scope.name = "Crist";
-        $scope.task = "Looking at his phone most often!";
-        $scope.students = [
-            {name:'Juan',grade:[60,70,90]},
-            {name:'Jose',grade:[80,80,40]},
-            {name:'Akane',grade:[40,70,80]}
-        ];
-        $scope.avg = (grades)=>{
+    // let angularApp = angular.module('firstApp',[]);
+    // angularApp.controller('repeatCtrl',($scope)=>{
+    //     $scope.name = "Crist";
+    //     $scope.task = "Looking at his phone most often!";
+    //     $scope.students = [
+    //         {name:'Juan',grade:[60,70,90]},
+    //         {name:'Jose',grade:[80,80,40]},
+    //         {name:'Akane',grade:[40,70,80]}
+    //     ];
+    //     $scope.avg = (grades)=>{
             
-            let sum = 0;
-            for(grade of grades){
-                sum += grade;
-            };
-            return (sum/grades.length).toFixed(2);
-        }
-        $scope.displayCristTask = (lastname)=>{
-            return $scope.name + ' ' + $scope.task + ' ' +lastname;
-        }
-    })
+    //         let sum = 0;
+    //         for(grade of grades){
+    //             sum += grade;
+    //         };
+    //         return (sum/grades.length).toFixed(2);
+    //     }
+    //     $scope.displayCristTask = (lastname)=>{
+    //         return $scope.name + ' ' + $scope.task + ' ' +lastname;
+    //     }
+    // })
     let myApp = angular.module('myApp',[]);
-    let students = new Map();
-    students.set("Mamiko",[50,70,80]);
     myApp.controller('repeatCtrl',($scope)=>{
-        $scope.student = {
-            "Mamiko":"HTML",
-            "Lin":"PHP",
-            "Matheus":"CSS"
+        // $scope.student = {
+        //     "Mamiko":"HTML",
+        //     "Lin":"PHP",
+        //     "Matheus":"CSS"
+        // };
+        $scope.students = new Map();
+        $scope.students.set("Mamiko",[50,70,80]);
+        $scope.students.set("test1",[50,70,80]);
+        $scope.students.set("test2",[50,70,80]);
+        
+        $scope.updateArray = () =>{
+            $scope.studentsArray = Array.from($scope.students,([name,course])=>({name,course}));
         }
-        let studentsArray = Array.from(students,([name,course])=>({name, course}));
-        $scope.students = studentsArray;
-
+        $scope.updateArray();
+        $scope.btnClick = () =>{
+            $scope.students.set($scope.studentName,$scope.grade);
+            console.log($scope.students);
+            $scope.updateArray();
+            $scope.studentName = "";
+            $scope.grade = "";
+        }
     })
 
 </script>

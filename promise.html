@@ -10,22 +10,23 @@
     
 </body>
 <script>
-    let JSPromise = new Promise (function (myResolve,myReject){
-        let x = 0;
+    
+    let JSPromise = new Promise(function(myResolve,myReject){
+        let x = 1;
         if(x==0){
             myResolve("X is zero");
         }else{
-            myReject("X is not zero");
+            myReject("X is not zero???!!!!!");
         }
     });
     JSPromise.then(
         function(value){alert(value);},
-        function(value){alert(value);}
-    );
-    let timerpromise = new Promise ((resolve,reject)=>{
-        setTimeout(()=>{resolve("I love JS!!!")},4000);
+        function(value){console.log(value);}
+    )
+    let timerPromise = new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve("I LOVE JS!!!!")},4000);
     });
-    timerpromise.then(
+    timerPromise.then(
         (value)=>{alert(value);}
     )
 </script>

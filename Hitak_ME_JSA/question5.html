@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body ng-app="jsonApp">
+    <div ng-controller="tableCtrl">
+        <input type="text" ng-repeat="ppl in people | orderBy:'name' | filter:nameSearch">
+        <table>
+            <thead>
+                <tr>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="data in textData">
+                    <td>{{data.first_name}}</td>
+                    <td>{{data.last_name}}</td>
+                    <td>{{data.email}}</td>
+                    <td>{{data.Phone}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    let loadFile = new Promise ((resolve,reject)=>{
+        let xhttpReq = new XMLHttpRequest();
+        xhttpReq.open("GET","./Contacts.json"); // if file is in wrong way - 404 not found msg will show up;
+        xhttpReq.onload = () => { // always with open and onload 
+            if (xhttpReq.status == 200){
+                resolve(xhttpReq.responseText);
+            }else {
+                reject(xhttpReq.statusText);
+            }
+        }
+        xhttpReq.send();
+    });
+    loadFile.then (
+        () => {},
+        () => {}
+    )
+    let jsonApp = angular.module("jsonApp",[]);
+    jsonApp.run(($rootScope,$http)=>{
+        $http.get("./Contacts.json").then(
+            (res)=>{
+                $rootScope.textData = res.data;
+                console.log(res.data)
+            }
+        )
+    })
+    jsonApp.controller("tableCtrl",($scope,$http)=>{
+        $scope.people = []
+    })
+</script>
+</html>

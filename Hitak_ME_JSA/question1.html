@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="./jquery-3.6.0.js"></script>
+</head>
+<body>
+    <div ng-app="angularApp">
+        <div ng-controller="ctrl">
+            <h2 ng-bind="fullname"></h2>
+            <h2 ng-bind="goaljob"></h2>
+            <img ng-src={{pic}}>
+        </div>
+    </div>
+</body>
+<script>
+    //Quesetion 1
+    class name {
+        constructor(fullname, goaljob, pic) {
+            this.fullname = fullname;
+            this.goaljob = goaljob;
+            this.pic = pic;
+        }
+    }
+    let angularApp = angular.module('angularApp',[]);
+    angularApp.controller('ctrl',function($scope){
+        $scope.fullname = "Hitak Lee";
+        $scope.goaljob = "Web Dev";
+        $scope.pic = './img/flag.png';
+    })
+
+</script>
+</html>

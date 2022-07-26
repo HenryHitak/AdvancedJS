@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body ng-app="jsonApp">
+    <div ng-controller="tableCtrl">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-model="textData">
+                    <td ng-repeat="name in employeeArray">
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    let jsonApp = angular.module('jsonApp',[]);
+    jsonApp.run(($rootScope,$http)=>{
+        $http.get('./data.json').then(
+            (res)=>{
+                $rootScope.textData=res.data;
+            alert(res.statusText);
+            }
+        ),(res)=>{
+            alert(res.statusText);
+        }
+    })
+    httpApp.controller('tableCtrl',($scope,$http)=>{
+        
+})
+    $scope.employeesArray = (employee) =>{
+        $scope.employeesArray = Array.from($scope.employee,([name,dept,pos,sal])=>({name,dept,pos,sal}));
+    }
+</script>
+</html>

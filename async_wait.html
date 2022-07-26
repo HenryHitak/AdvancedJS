@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+</body>
+<script>
+    async function sayHi(inputwater){
+        let aprilPromise = new Promise((resolve,reject)=>{
+            if(inputwater>0 && inputwater<20){
+                resolve("Lin-Wen here is your water!");
+            }else if(inputwater>20){
+                throw new Error("You have too much water");
+            }
+            else{
+                reject("Nop water")
+            }
+        });
+        document.getElementsByTagName('h1')[0].innerHTML = await aprilPromise;
+        //only going to be executed when a promise is done and not rejected
+    }
+    sayHi(15)
+    .then(
+        (value)=>{},
+        (reason)=>{console.log(reason)}
+    )
+    .catch(
+        (err)=>{console.log(err);}
+    )
+    .finally(
+        ()=>{console.log("Promise Settled");}
+    )
+    function sayHi2(){
+        let x=1;
+        if(x==0){
+            return Promise.resolve("Jake");
+        }
+        return Promise.reject("GoodBye");
+    }
+    // sayHi().then(
+    //     (value)=>{alert(value);}
+    // );
+    sayHi2().then(
+        (value)=>{alert("SayHi2: "+value);},
+        (error)=>{console.log(error)}
+    )
+</script>
+</html>

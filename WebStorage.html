@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Welcome: </h2>
+    <input type="text" placeholder="Write your name"/>
+    <input type="text" placeholder="Write your Family"/>
+    <input type="text" placeholder="Write your Country"/>
+    <button type="button">Clear Local</button>
+    <button type="button">Store</button>
+</body>
+<script>
+    let h2 = document.getElementsByTagName("h2")[0];
+    let btnstore = document.getElementsByTagName("button")[1];
+    let inputs = document.getElementsByTagName("input");
+    class user{
+        constructor(name,family,country){
+            this.name = name;
+            this.family = family;
+            this.country = country;
+        }
+    }
+    btnstore.addEventListener("click",()=>{
+        let name = inputs[0].value;
+        let family = inputs[1].value;
+        let country = inputs[2].value;
+        let newUser = new user(name,family,country);
+        localStorage.setItem("userInfo",JSON.stringify(newUser));
+    })
+    let welkomen = ()=>{
+        if(localStorage.getItem("userInfo")==null){
+            h2.innerHTML += "guest";
+        }else{
+            let data = JSON.parse(localStorage.getItem("userInfo"));
+            console.log(data);
+            h2.innerHTML += data.name;
+        }
+    }
+    welkomen();
+    let btnclear = document.getElementsByTagName("button")[0];
+    // localStorage.setItem("Name","Mamiko"); //will store a data until JS clear the data.
+    // localStorage.setItem("City","vancouver");
+    // sessionStorage.setItem("Family","April"); //will store a data until the end of the current session
+    // for(let i=0;i<localStorage.length;i++){
+    //     console.log(localStorage.key(i));
+    // }
+    btnclear.addEventListener("click",()=>{
+        //localStorage.clear(); //clear all the localstorage data
+        localStorage.removeItem("Name"); //to remove a specific key
+    })
+</script>
+</html>

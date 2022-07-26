@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+</body>
+<script>
+    //Question
+// create 4 functions:
+// 1- for returning the + of a collection of numbers (array of numbers)
+// 2- for returning the * of a collection of numbers
+// 3- for returning the - of a collection of numbers
+// 4- for returning the / of a collection of numbers. throw a custom error if one number is 0.
+// then create a main function which will take each function as a parameter (JS callback) and display the result in an H1 element. Array of numbers and which operator to be selected should be sent as two paramerters.
+// Display(F1,F2,F3,F4,array,operatorOfChoice)
+// operatorOfChoice = + , - , * , /
+
+    let H1 = document.getElementsByTagName("h1")[0];
+    let numbers = [10,5,45.8,20,30];
+    function sum(input){
+        let result = 0;
+        for(let num of input){
+            result += num;
+        }
+        return result;
+    }
+    function sub(input){
+        let result = input[0];
+        for(let i=1;i<input.length;i++){
+            result -= input[i];
+        }
+        return result;
+    }
+    function multi(input){
+        let result = 1;
+        for(let num of input){
+            result *= num;
+        }
+        return result;
+    }
+    function div(input){
+        let result = input[0];
+        try{
+            for(let i=1;i<input.length;i++){
+                if(input[i]==0){
+                    throw "Div by Zero";
+                }
+                result /= input[i];
+            }
+        }catch(err){
+            result = err;
+        }finally{
+            return result;
+        }
+    }
+    function mainFunction(sumFunction,subFunction,multiFunction,divFunction,arrayNum,Operator){
+        let result = 0;
+        switch(Operator){
+            case "+":
+                result = sumFunction(arrayNum);
+                break;
+            case "-":
+                result = subFunction(arrayNum);
+                break;
+            case "*":
+                result = multiFunction(arrayNum);
+                break;
+            case "/":
+                result = divFunction(arrayNum);
+                break;
+        }
+        H1.innerHTML = result;
+    }
+    mainFunction(sum,sub,multi,div,numbers,"/");
+</script>
+</html>

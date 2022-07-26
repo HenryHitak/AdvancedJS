@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="empApp">
+        <div ng-controller="Ctrl">
+            <input type="text" placeholder="Name" ng-model="empName">
+            <input type="text" placeholder="Department" ng-model="empDep">
+            <input type="text" placeholder="Position" ng-model="empPos">
+            <input type="number" placeholder="Salary" ng-model="empSal">
+            <button type="button" ng-click="btnClick1()">Add info</button>
+            <button type="button" ng-click="btnClick2()">Clear</button>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Department
+                        </th>
+                        <th>
+                            Position
+                        </th>
+                        <th>
+                            Salary
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="em in empArray">
+                        <td>{{em.obj.id}}</td>
+                        <td>{{em.obj.name}}</td>
+                        <td>{{em.obj.dept}}</td>
+                        <td>{{em.obj.pos}}</td>
+                        <td>{{em.obj.sal}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+<script>
+    let sum = 0;
+    //Get the employees information using a HTML from. Then add two button, one to add the information to the table and the other one to clear the input boxes. Employee information should be:
+    //EmployeeID => started from 1000
+    //EmployeeName
+    //EmployeeDepartment
+    //EmployeePosition
+    //EmployeeSalary
+    //Add a table to the same page which will display all the employees' information. 
+    let id =1000; // starting id from 1000
+    class employee { //creating var to store the data
+        constructor(id, name, dept, pos, sal) {
+            this.id = id;
+            this.name = name;
+            this.dept = dept;
+            this.pos = pos;
+            this.sal = sal;
+            
+        }
+
+    }
+    let empApp = angular.module('empApp',[]);//start app 
+    empApp.controller('Ctrl',($scope)=>{//adding controller 
+            $scope.emp = new Map(); // setting map to obj
+            $scope.btnClick1 = () =>{ // button click function to add new key and value in to the table
+            let employeesArray = new employee(id,$scope.empName,$scope.empDep,$scope.empPos,$scope.empSal); // list to put the value in side of the map and set.
+            $scope.emp.set(id,employeesArray); // put list in side of set (key, value)
+            console.log(employeesArray);            
+            $scope.updateArray = () =>{ //update array function
+                $scope.empArray = Array.from($scope.emp,([id,obj])=>({id,obj})); // making array to get the value
+            console.log($scope.empArray);
+            }
+            $scope.updateArray();// executing the function
+            id++; //increment id everytime updating new input data
+            
+        }
+        $scope.btnClick2 = () =>{ // clean the input after input data.
+            $scope.empName = "";
+            $scope.empDep = "";
+            $scope.empPos = "";
+            $scope.empSal = "";
+        }
+    });
+    
+</script>
+</html>
