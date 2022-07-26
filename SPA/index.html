@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+</head>
+<body ng-app="spaApp">
+    <header>
+        <nav>
+            <a href="#/!">Home</a>
+            <a href="#!register">Register</a>
+            <a href="#!about">About</a>
+        </nav>
+    </header>
+    <main ng-view>
+        <!-- all content pages will be displayed here -->
+    </main>
+    <footer>
+        This is just a footer
+    </footer>
+</body>
+<script>
+    let spaApp = angular.module('spaApp',["ngRoute"]);
+    spaApp.config(function ($routeProvider){
+        $routeProvider
+        .when("/",{
+            templateUrl:"./pages/home.html"
+        })
+        .when("/register",{
+            templateUrl:"./pages/register.html"
+        })
+        .when("/about",{
+            templateUrl:"./pages/about.html"
+        })
+    })
+    spaApp.run(($rootScope)=>{
+        $rootScope.name = "April"
+    })
+    spaApp.controller('aboutCtrl',($scope,$rootScope)=>{
+        $scope.lastname = "something";
+    })
+</script>
+</html>

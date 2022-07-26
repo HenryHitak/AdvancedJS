@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <style>
+        input.ng-valid{
+            background-color: lightgreen;
+        }
+        .ng-touched{
+            background-color: burlywood;
+        }
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body ng-app="regApp">
+    <form name="registerForm" ng-controller="regCtrl">
+    <input type="text" name="usernameInput" ng-model="username" required>
+    <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
+    <!-- <p class="error" ng-hide="{{registerForm.usernameInput.$untouched}} && {{registerForm.usernameInput.$pristine}} || {{registerForm.usernameInput.$invalid}}" >Username should be filled</p> -->
+    <h4>valid:{{registerForm.usernameInput.$valid}}</h4>
+    <h4>invalid:{{registerForm.usernameInput.$invalid}}</h4>
+    <h4>untouched:{{registerForm.usernameInput.$untouched}}</h4>
+    <h4>touched:{{registerForm.usernameInput.$touched}}</h4>
+    <h4>pristine:{{registerForm.usernameInput.$pristine}}</h4>
+    <h4>dirty:{{registerForm.usernameInput.$dirty}}</h4>
+    </form>
+</body>
+<script>
+    let regApp = angular.module('regApp',[]);
+    regApp.controller('regCtrl',($scope)=>{
+        console.log(registerForm.usernameInput);
+        switch(event.type){
+
+        }
+    })
+</script>
+</html>
