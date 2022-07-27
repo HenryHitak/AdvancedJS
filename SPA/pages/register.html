@@ -1,4 +1,7 @@
 <div ng-controller="aboutCtrl">
     <h1>Register page</h1>
-    <input type="text" ng-model="name"/>
+    <input type="text" ng-model="name" placeholder="name"/>
+    <input type="text" ng-model="age" placeholder="age">
+    <input type="text" ng-model="country" placeholder="country">
+    <a href="#!about?name={{name}}&age={{age}}&country={{country}}">Next Page</a>
 </div>

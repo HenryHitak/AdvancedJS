@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="intro">
+        <!-- <h1>{{welcomeMsg}}</h1> -->
+        <h1>{{allInfo()}}</h1> <img v-bind:src="imgSrc">
+
+    </div>
+    <div id="firstVue">
+        <first-compo></first-compo>
+    </div>
+    <div id="secondVue">
+        <secondcompo></secondcompo>
+        <namecompo></namecompo>
+    </div>
+</body>
+<script>
+    let vue_intro = new Vue({
+        el:"#intro",
+        data:{
+            firstName:"Hitak",
+            lastName:"Lee",
+            imgSrc:"/Hitak_ME_JSA/img/flag.png"
+        },
+        methods:{
+            allInfo: function(){
+                return this.firstName + " "+ this.lastName;
+            }
+        }
+    })
+    Vue.component('firstCompo',{
+        template:"<h2>I am the first Component</h2>"
+    });
+    let firstVue = new Vue({
+        el:'#firstVue'
+    })
+    let secondVue = new Vue({
+        el:'#secondVue',
+        components:{
+            'secondcompo':{
+                template:'<h2>I am the second Component</h2>'
+            },
+            'namecompo':{
+                template:'<h2>I am the othe Component</h2>'
+            }
+        }
+    })
+</script>
+</html>

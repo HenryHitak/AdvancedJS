@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="intro">
+        <!-- <h1>{{welcomeMsg}}</h1> -->
+        <h1>{{firstName}}</h1>
+        <h1>{{country}}</h1>
+        <h3>{{allInfo()}}</h3>
+        <div v-html="htmlContent"></div>
+        <img v-bind:src="imgSrc">
+    </div>
+</body>
+<script>
+    let vue_intro = new Vue({
+        el:"#intro",
+        data:{
+            // welcomeMsg:"My first Vue App",
+            firstName:"Mamiko",
+            country:"Japan",
+            htmlContent:"<h2>A simple content by vue</h2>",
+            imgSrc:"/Hitak_ME_JSA/img/flag.png"
+        },
+        methods:{
+            allInfo: function(){
+                return this.firstName + " is from " + this.country;
+            }
+        }
+    })
+</script>
+</html>

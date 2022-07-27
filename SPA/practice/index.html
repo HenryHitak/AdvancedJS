@@ -11,40 +11,35 @@
 <body ng-app="spaApp">
     <header>
         <nav>
-            <a href="#/!">Home</a>
-            <a href="#!register">Register</a>
-            <a href="#!about">About</a>
+            <a href="#/!">First Page</a>
+            <a href="#!second">Second Page</a>
         </nav>
     </header>
     <main ng-view>
         <!-- all content pages will be displayed here -->
     </main>
-    <footer>
-        This is just a footer
-    </footer>
 </body>
 <script>
     let spaApp = angular.module('spaApp',["ngRoute"]);
     spaApp.config(function ($routeProvider){
         $routeProvider
         .when("/",{
-            templateUrl:"./pages/home.html"
+            templateUrl:"./first.html"
         })
-        .when("/register",{
-            templateUrl:"./pages/register.html"
+        .when("/second",{
+            templateUrl:"./second.html"
         })
-        .when("/about",{
-            templateUrl:"./pages/about.html"
-        })
-    })
-    spaApp.run(($rootScope)=>{
-        // $rootScope.name = "April"
     })
     spaApp.controller('aboutCtrl',($scope,$rootScope,$location)=>{
+        let err = false;
         let searchObj = $location.search();
+        if(searchObj.name!=undefined||searchObj.country!=undefined||searchObj.country!=undefined){
         $scope.name = searchObj.name;
         $scope.country = searchObj.country;
-        $scope.age = searchObj.age;
+        $scope.age = 2022- parseInt(searchObj.age) ;
+        }else{
+            $scope.err = true;
+        }
     })
 </script>
 </html>
