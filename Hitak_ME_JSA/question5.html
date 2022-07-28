@@ -10,7 +10,7 @@
 </head>
 <body ng-app="jsonApp">
     <div ng-controller="tableCtrl">
-        <input type="text" ng-repeat="ppl in people | orderBy:'name' | filter:nameSearch">
+        <input type="text" ng-repeat="ppl in people | orderBy:'first_name' | filter:first_nameSearch">
         <table>
             <thead>
                 <tr>

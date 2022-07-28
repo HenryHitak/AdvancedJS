@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <style>
+        div>h1:nth-child(0){
+            color: black;
+        }
+    </style>
+    <div id="renderingVue">
+        <h3 v-show="practicing" :style="h1Style">If I practice</h3>
+        <h1 v-if="practicing" :style="h1Style">I will be happy</h1>
+        <h1 v-else="practicing":style="h1Style">I will be sad</h1>
+        <h1 v-if="practicing":style="h1Style">I will be very happy</h1>
+        <h1 v-else="practicing":style="h1Style">I will be very sad</h1>
+        <input type="checkbox" v-model="practicing">
+        <ul>
+            <li v-for="(drink,idx) in drinks">{{drink}}---{{idx}}</li>
+            <li v-for="drink in drinks">{{drink}}</li>
+        </ul>
+        <select>
+            <option v-for="(drink,idx) in drinks">{{drink}}---{{idx}}</option>
+            <!-- <option v-for="drink in drinks">{{drink}}</option> -->
+        </select>
+        <input type="text" v-model="drnk"> 
+        <button type="button" v-on:click="addrink" >Add drink</button>
+        <div v-for="(value,name,idx) in student" >
+            {{name}}:{{value}}:{{idx}}
+        </div>
+        <div v-for="student in students">
+            name:{{student.name}} from:{{student.country}}
+        </div>
+    </div>
+</body>
+<script>
+    let renderingVue = new Vue ({
+        el:'#renderingVue',
+        data:{
+            practicing:false,
+            // practicing:true
+            h1Style:{
+                color:'pink',
+                fontSize:'50px'
+            },
+            student:{
+                name:'Akane',
+                country:'japan',
+                job:'student'
+            },
+            students:[
+                {name:'Akane', country:'Japan'},
+                {name:'Henry', country:'Korea'},
+                {name:'Mat', country:'BR'}
+            ],
+            drinks:['water','coffee','monster'],
+            drnk:"" //store data
+        },
+        methods:{
+            addrink: function(){ //function to add input data into array
+                this.drinks.push(this.drnk); //pushing input data to list
+                this.drnk= ""
+            }
+        }
+    })
+</script>
+</html>

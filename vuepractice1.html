@@ -43,9 +43,12 @@
     })
     let secondVue = new Vue({
         el:'#secondVue',
+        data:{
+            firstName:"Henry"
+        },
         components:{
             'secondcompo':{
-                template:'<h2>I am the second Component</h2>'
+                template:'<h2>My name is' +' </h2>'
             },
             'namecompo':{
                 template:'<h2>I am the othe Component</h2>'
