@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="vue1">
+        <input type="text" v-model="typedValue" @keyup.enter="shValue"/>
+        <button type="button" @click.once="shValue">Show the value</button>
+        <a href="https://tamwood.com/" @click.prevent="shValue">Click me</a>
+    </div>
+</body>
+<script>
+    let vue1 = new Vue({
+        el:"#vue1",
+        data:{
+            typedValue:''
+        },
+        methods:{
+            shValue:function(){
+                alert(this.typedValue);
+            }
+        }
+    })
+</script>
+</html>

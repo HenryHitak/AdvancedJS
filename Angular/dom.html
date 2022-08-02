@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./angular.js"></script>
+</head>
+<body ng-app="domApp">
+    <div ng-controller="domCtrl">
+        <input type="checkbox" ng-model="chkchecked"/>Enable
+        <h2>{{chkchecked}}</h2>
+        <input type="text" ng-focus="bgColorChanger($event)" ng-blur="bgColorChanger($event)" ng-disabled="!chkchecked"/>
+        <input type="text" ng-focus="bgColorChanger($event)" ng-blur="bgColorChanger($event)" value="second input"ng-show="chkchecked"/>
+        <input type="text" ng-focus="bgColorChanger($event)" ng-blur="bgColorChanger($event)" value="third input" ng-hide="chkchecked"/>
+    </div>
+    <user-list></user-list>
+</body>
+<script>
+    let domApp = angular.module('domApp',[]);
+    domApp.controller('domCtrl',($scope)=>{
+        $scope.bgColorChanger = (event)=>{
+            let bgcolor = "white";
+            switch(event.type){
+                case "focus":
+                    bgcolor = "yellow";
+                    break;
+                case "blur":
+                    bgcolor = "white";
+                    break;
+            }
+            event.target.style.backgroundColor = bgcolor;
+        };
+    });
+    domApp.directive('userList',()=>{
+        return{
+            template:"<h2>{{user}}</h2>",
+            controller: function usrCtrl($scope){
+                $scope.user="Milad"
+            }
+        }
+    })
+</script>
+</html>

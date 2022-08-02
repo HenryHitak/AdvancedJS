@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" placeholder="Write your username"/><br/>
+    <input type="password" placeholder="Write your password"/><br/>
+    <input type="checkbox" />Remember me<br/>
+    <button type="button">Login</button>
+</body>
+<script>
+    let setCookie = (CookieName, CookieValue, Exp) =>{
+        const currentTime = new Date();
+        currentTime.setTime(currentTime.getTime() + (Exp*24*60*60*1000));
+        let Cookie_Exp = "expires="+currentTime.toUTCString();
+        document.cookie = "  " + CookieName + "=" + CookieValue + ";" + Cookie_Exp;
+    };
+    let getCookie = (CookieName) =>{
+        let cookieKey = CookieName + "=";
+        let cookies = decodeURIComponent(document.cookie);
+        let cookieArray = cookies.split(";");
+        console.log(cookieArray);
+        for(let cookie of cookieArray){
+            while(cookie.charAt(0) == ' '){
+                cookie = cookie.substring(1);
+            }
+            if(cookie.indexOf(cookieKey) == 0){
+                return cookie.substring(cookieKey.length);
+            }
+        }
+        return "";
+    }
+    let usernameChecker = () =>{
+        let username = getCookie("username");
+        if(username!=""){
+            usernameInput.value = username;
+        }
+    }
+    //setCookie("username","test",2);
+    //setCookie("color","red$&",2);
+    //console.log(getCookie("username"));
+    let usernameInput = document.getElementsByTagName("input")[0];
+    let checkBox = document.getElementsByTagName("input")[2];
+    let btnLogin = document.getElementsByTagName("button")[0];
+    usernameChecker();
+    btnLogin.addEventListener("click",()=>{
+        if(checkBox.checked){
+            setCookie("username",usernameInput.value,4);
+        }
+    })
+</script>
+</html>

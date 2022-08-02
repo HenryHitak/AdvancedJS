@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="renderingVue">
+        <h3 v-show="practicing">If I practice</h3>
+        <h1 v-if="practicing">I will be Happy</h1>
+        <h1 v-else>I will be Sad</h1>
+        <h1 v-if="practicing">I will be Happy</h1>
+        <h1 v-else>I will be very sad</h1>
+        <input type="checkbox" v-model="practicing"/>
+        <br/>
+        <input type="text" v-model="newDrink"/>
+        <button type="button" @click="drinkAdder">Add</button>
+        <ul>
+            <li v-for="(drink,idx) in drinks">{{drink}}---{{idx}}</li>
+        </ul>
+        <select>
+            <option v-for="(drink,idx) in drinks" :value="idx">{{drink}}</option>
+        </select>
+        <div v-for="(value,name,idx) in student">
+            {{name}}:{{value}}:{{idx}}
+        </div>
+        <div v-for="student in students">
+            name:{{student.name}} from {{student.country}}
+        </div>
+    </div>
+</body>
+<script>
+    let renderingVue = new Vue({
+        el:'#renderingVue',
+        data:{
+            newDrink:'',
+            practicing:false,
+            drinks:['water','coffee','monster'],
+            student:{
+                name:'Akane',
+                country:'Japan',
+                Job:'student'
+            },
+            students:[
+                {name:'Akane',country:'Japan'},
+                {name:'Henry',country:'Korea'},
+                {name:'Mat',country:'Brazil'}
+            ]
+        },
+        methods:{
+            drinkAdder:function(){
+                this.drinks.push(this.newDrink);
+                this.newDrink='';
+            }
+        }
+    })
+</script>
+</html>

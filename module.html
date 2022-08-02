@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
-    <!-- <div ng-app="firstApp">
+    <div ng-app="firstApp">
         <div ng-controller="repeatCtrl">
         <ul>
             <li ng-repeat="student in students">
@@ -43,8 +43,8 @@
         <h1 ng-bind="displayCristTask('Rocha')"></h1>
         <h3>{{displayCristTask('Rocha2')}}</h3>
         </div>
-    </div> -->
-   <div ng-app="myApp">
+    </div>
+   <!-- <div ng-app="myApp">
         <div ng-controller="repeatCtrl">
             <input type="text" ng-model="studentName"/>
             <input type="text" ng-model="grade"/>
@@ -60,54 +60,54 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> -->
 </body>
 <script>
-    // let angularApp = angular.module('firstApp',[]);
-    // angularApp.controller('repeatCtrl',($scope)=>{
-    //     $scope.name = "Crist";
-    //     $scope.task = "Looking at his phone most often!";
-    //     $scope.students = [
-    //         {name:'Juan',grade:[60,70,90]},
-    //         {name:'Jose',grade:[80,80,40]},
-    //         {name:'Akane',grade:[40,70,80]}
-    //     ];
-    //     $scope.avg = (grades)=>{
+    let angularApp = angular.module('firstApp',[]);
+    angularApp.controller('repeatCtrl',($scope)=>{
+        $scope.name = "Crist";
+        $scope.task = "Looking at his phone most often!";
+        $scope.students = [
+            {name:'Juan',grade:[60,70,90]},
+            {name:'Jose',grade:[80,80,40]},
+            {name:'Akane',grade:[40,70,80]}
+        ];
+        $scope.avg = (grades)=>{
             
-    //         let sum = 0;
-    //         for(grade of grades){
-    //             sum += grade;
-    //         };
-    //         return (sum/grades.length).toFixed(2);
-    //     }
-    //     $scope.displayCristTask = (lastname)=>{
-    //         return $scope.name + ' ' + $scope.task + ' ' +lastname;
-    //     }
-    // })
-    let myApp = angular.module('myApp',[]);
-    myApp.controller('repeatCtrl',($scope)=>{
-        // $scope.student = {
-        //     "Mamiko":"HTML",
-        //     "Lin":"PHP",
-        //     "Matheus":"CSS"
-        // };
-        $scope.students = new Map();
-        $scope.students.set("Mamiko",[50,70,80]);
-        $scope.students.set("test1",[50,70,80]);
-        $scope.students.set("test2",[50,70,80]);
-        
-        $scope.updateArray = () =>{
-            $scope.studentsArray = Array.from($scope.students,([name,course])=>({name,course}));
+            let sum = 0;
+            for(grade of grades){
+                sum += grade;
+            };
+            return (sum/grades.length).toFixed(2);
         }
-        $scope.updateArray();
-        $scope.btnClick = () =>{
-            $scope.students.set($scope.studentName,$scope.grade);
-            console.log($scope.students);
-            $scope.updateArray();
-            $scope.studentName = "";
-            $scope.grade = "";
+        $scope.displayCristTask = (lastname)=>{
+            return $scope.name + ' ' + $scope.task + ' ' +lastname;
         }
     })
+    // let myApp = angular.module('myApp',[]);
+    // myApp.controller('repeatCtrl',($scope)=>{
+    //     // $scope.student = {
+    //     //     "Mamiko":"HTML",
+    //     //     "Lin":"PHP",
+    //     //     "Matheus":"CSS"
+    //     // };
+    //     $scope.students = new Map();
+    //     $scope.students.set("Mamiko",[50,70,80]);
+    //     $scope.students.set("test1",[50,70,80]);
+    //     $scope.students.set("test2",[50,70,80]);
+        
+    //     $scope.updateArray = () =>{
+    //         $scope.studentsArray = Array.from($scope.students,([name,course])=>({name,course}));
+    //     }
+    //     $scope.updateArray();
+    //     $scope.btnClick = () =>{
+    //         $scope.students.set($scope.studentName,$scope.grade);
+    //         console.log($scope.students);
+    //         $scope.updateArray();
+    //         $scope.studentName = "";
+    //         $scope.grade = "";
+    //     }
+    // })
 
 </script>
 </html>

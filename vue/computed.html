@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="computedVue">
+        <input type="text" v-model="fullName" placeholder="Write your first name"/>
+        <h1>{{firstname}} {{lastname}}</h1>
+        <h1>Method: {{fullNameMethod()}}</h1>
+        <hr/>
+        <h2>computed:{{randomComputed}}</h2>
+        <h2 style="background-color: lightgray;">method:{{randomMethod()}}</h2>
+        <h2>computed:{{randomComputed}}</h2>
+        <h2 style="background-color: lightgray;">method:{{randomMethod()}}</h2>
+     
+        
+    </div>
+</body>
+<script>
+    let computedVue = new Vue({
+        el:"#computedVue",
+        data:{
+            firstname:'Henry',
+            lastname:'Korea'
+        },
+        methods:{
+            fullNameMethod:function(){
+                return this.firstname + " " + this.lastname;
+            },
+            randomMethod:function(){
+                return Math.random();
+            }
+        },
+        computed:{
+            fullName:{
+                get:function(){
+                    return this.firstname + " " + this.lastname;
+                },
+                set:function(value){
+                    let fName = value.split(" ");
+                    if(fName.length==1){
+                        this.lastname = "";
+                    }else{
+                        this.firstname = fName[0];
+                        this.lastname = fName[1];
+                    }
+                    
+                    
+                }
+            },
+            randomComputed:function(){
+                return Math.random();
+            }
+        }
+    })
+</script>
+</html>

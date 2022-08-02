@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<!-- create calculator
+two input boxes for num1 & num2 + one h1 tag for the result.
+add 4 buttons, each for one math operator +-*/
+check for / that the 2nd number is not 0.
+If it were 0, unhide a h4 tag which shows the error as the 2nd number should not be Zero.
+And each time after user clicked on one of the buttons, clear the 2 first input boxes. -->
+<!-- Have an input element and a <button>show the value of the button in an alert msg when user click on the button</button> -->
+<body>
+    <div id="vueCss">
+        
+        <input type="text" v-model="val">
+        <button type="button" v-on:click.once="show">Show</button>
+        <a href="https://tamwood.com" @click.prevent="show" @keyup.delete="show">Click</a>
+        <h1 v-model="total">Result:{{total}}</h1>
+        <input type="text" placeholder="num1" v-model="num1">
+        <input type="text" placeholder="num2" v-model="num2">
+        <button type="button" v-on:click="sum">Sum</button>
+        <button type="button" v-on:click="sub">Subtract</button>
+        <button type="button" v-on:click="mul">Multiply</button>
+        <button type="button" v-on:click="div">Divide</button>
+    </div>
+</body>
+<script>
+    let vueCss = new Vue({
+        el:'#vueCss',
+        data:{
+            total:"",
+            num1:"",
+            num2:"",
+            istrue:true,
+            isfalse:false,
+            val:""
+        },
+        methods:{
+            sum: function(){
+                this.total = parseInt(this.num1)+parseInt(this.num2)
+            },
+            sub: function(){
+                if(parseInt(this.total) < 0){
+                    alert("number cannot be less than 0");
+                }else{
+                    this.total = parseFloat(this.num1)-parseInt(this.num2)
+                }
+            },
+            mul: function(){
+                
+            },
+            div: function(){
+                
+            },
+            show: function(){
+                alert(this.val)
+            }
+        }
+    })
+</script>
+</html>

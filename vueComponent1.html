@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="logDiv">
+        <button type="button" @click="chCompo">Register</button>
+        <button type="button" v-on:click="chCompo">Login</button>
+        <component v-bind:is="compoName"></component>
+    </div>
+</body>
+<script>
+    Vue.component('regCompo',{
+        template:'<div><h2>Registeration page</h2><input type="text" placeholder="write yourname"/></div>'
+    });
+    Vue.component('logCompo',{
+        template:"<div><h2>Login page</h2><input type='text' placeholder='username'/><input v-bind:type='inputType' placeholder='write password'/><button type='button' @click='shPass'>{{shBtnText}}</button></div>",
+        data:function(){
+            return{
+                inputType:'password',
+                shBtnText:'Show password'
+            }
+        },
+        methods:{
+            shPass:function(){
+                if(this.shBtnText == 'Show password'){
+                    this.shBtnText = "Hide password";
+                    this.inputType = 'text';
+                }else{
+                    this.shBtnText = "Show password";
+                    this.inputType = 'password';
+                }
+            }
+        }
+    })
+    let logVue = new Vue({
+        el:"#logDiv",
+        data:{
+            compoName:'regCompo'
+        },
+        methods:{
+            chCompo:function(event){
+                if(event.target.innerText == 'Login'){
+                    this.compoName = 'logCompo';
+                }else{
+                    this.compoName = 'regCompo';
+                }
+            }
+        }
+    })
+</script>
+</html>

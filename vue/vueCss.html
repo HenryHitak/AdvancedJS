@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+    <style>
+        .bgClass{
+            background-color: aqua;
+        }
+        .redBg{
+            background-color: red;
+            
+        }
+    </style>
+</head>
+<body>
+    <div id="vueCss">
+        <h3 :class="{bgClass:istrue, redBg:hasErr}">Web Development Class is Fun</h3>
+        <h2 :class="[istrue ? blueBg:bgRed]">condition ? execute if true : execute if false</h2>
+        <h1 :style="h1Style">{{name}} Happy long weekend</h1>
+        <p :style="h1Style">But I will practice!!</p>
+        <input type="text" v-model="name"/>
+        <input type="color" v-model="h1Style.color"/>
+        <input type="checkbox" v-model="hasErr"/>
+        <input type="range" v-model="num" @change="chNum"/>
+        <button type="button" @click="chColor">Color Changer</button>
+    </div>
+</body>
+<script>
+    let vueCss = new Vue({
+        el:'#vueCss',
+        data:{
+            name:'jake',
+            blueBg:'bgClass',
+            bgRed:'redBg',
+            istrue:true,
+            hasErr:false,
+            colorVal:'red',
+            fontSizeVal:'40',
+            h1Style:{
+                color:'pink',
+                fontSize: '40px'
+            },
+            num:0
+        },
+        methods:{
+            chColor:function(){
+                console.log(this.h1Style.color);
+                this.istrue = !this.istrue;
+            },
+            chNum:function(){
+                this.h1Style.fontSize = this.num + "px"
+            }
+        }
+    })
+</script>
+</html>

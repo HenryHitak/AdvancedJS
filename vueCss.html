@@ -27,6 +27,7 @@
         <input type="text" v-model="name" >
         <input type="color" v-model="h1Style.color" >
         <input type="checkbox" v-model="haserr">
+        <input type="range" step = "10" max="10000" min="1" v-model="fnt"/>
         <button v-on:click="chColour" type="button" >Colour</button>
 
     </div>
@@ -45,11 +46,22 @@
             h1Style:{
                 color:'pink',
                 fontSize:'50px'
-            }
+            },
+            fnt:{fontSize:'20px'},
+            num:40
         },
         methods:{
             chColour: function(){
                 this.istrue = !this.istrue;
+            },
+            chNum: function(){
+                this.h1Style.fontSize = this.num + "px";
+            }
+        },
+        watch:{
+            fnt:function(v){
+                this.fnt=v;
+                this.h1Style.fontSize = v + "px";
             }
         }
     })

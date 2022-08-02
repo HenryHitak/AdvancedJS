@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="props">
+        <course-button v-for="course in courses" v-bind:course-name="course" name="hey"></course-button>
+    </div>
+</body>
+<script>
+    Vue.component('courseButton',{
+        template:'<div><button @click="shCourse(courseName)">{{courseName}} {{name}}</button><h1>{{courseName}}</h1></div>',
+        props:['courseName','name'],
+        methods:{
+            shCourse:function(cName){
+                alert(cName);
+            }
+        }
+    })
+
+    let props = new Vue({
+        el:"#props",
+        data:{
+            courses:['HTML','CSS','JS1','JS2','PHP','CMS']
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="calApp">
+        <input type="text" placeholder="put in the km" v-model="km" >
+        <input type="text" placeholder="put in the m" v-model="m">
+        <button type="button" v-on:click="calculate">calculate</button>
+    </div>
+</body>
+<script>
+    let calApp = new Vue ({
+        el:'#calApp',
+        data:{
+            km:"",
+            m:""
+        },
+        methods:{
+            calculate : function(){
+                if(this.km == ""){
+                    this.km = parseInt(this.m)*1000
+                }else if(this.m == ""){
+                    this.m = parseInt(this.km)/1000
+                }
+            }
+        },
+        // watch:{
+        //     km:function(v){
+        //         this.km = v;
+        //         this.m = v * 1000;
+        //     },
+        //     m:function(val){
+        //         this.m = val;
+        //         this.km = val / 1000; 
+        //     }
+        // }
+    })
+</script>
+</html>

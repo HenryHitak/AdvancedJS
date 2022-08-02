@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="firstApp">
+        <div ng-controller="firstCtrl">
+            <h2 ng-bind="firstName"></h2>
+            <h2 ng-bind="lastName"></h2>
+        </div>
+        <div ng-controller="secondCtrl">
+            <h2 ng-bind="firstName"></h2>
+            <h2 ng-bind="lastName"></h2>
+        </div>
+        <div ng-controller="firstCtrl">
+            <h2 ng-bind="firstName"></h2>
+            <h2 ng-bind="lastName"></h2>
+        </div>
+        
+    </div>
+</body>
+<script>
+    let angularApp = angular.module('firstApp',[]);
+    angularApp.controller('firstCtrl',function($scope){
+        let firstName = "Henry";
+        $scope.firstName = "Juan";
+        $scope.lastName = "Jose";
+    })
+    angularApp.controller('secondCtrl',function($scope){
+        $scope.firstName = "Matheus";
+        $scope.lastName = "Who is not listening AT ALL!!";
+    })
+</script>
+</html>

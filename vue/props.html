@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="propsVue">
+        <h1>{{name}} have select:{{selectedCourse}}</h1>
+        <course-button 
+        v-for="(course,idx) in courses" 
+        v-bind:course-name="course"
+        :key="idx" 
+        :name="idx"
+        v-on:childevent="childClick">
+        <!-- v-bind를 사용하는 콜론:  / event trigger v-on //childevent는 shCourse function에 있는 기능으로 emit를 하여 child에서 parents로 value를 보낸다-->
+
+        </course-button>
+        
+    </div>
+</body>
+<script>
+    Vue.component('courseButton',{
+        template:'<button @click="shCourse(courseName)">{{courseName}} {{name}}</button>',
+        props:['courseName','name'], //connects child to parents
+        methods:{
+            shCourse:function(cName){
+                this.$emit('childevent',cName,"henry");
+            }
+        }
+    })
+    let propsVue = new Vue({
+        el:"#propsVue",
+        data:{
+            courses:['HTML','CSS','JS1','JS2','PHP','CMS'],
+            selectedCourse:'',
+            name:''
+        },
+        methods:{
+            childClick:function(val,name){
+                // alert("child clicked "+name);
+                this.selectedCourse = val;
+                this.name = name;
+            }
+        }
+    });
+
+</script>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <div ng-app="firstApp">
+        <div ng-controller="repeatCtrl">
+        <!-- <ul>
+            <li ng-repeat="student in students">
+                Name:{{student.name}} Garde:{{student.grade}}
+            </li>
+        </ul> -->
+        <input type="text" ng-model="nameSearch"/>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>course1</th>
+                    <th>course2</th>
+                    <th>course3</th>
+                    <th>average</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="student in students | orderBy:'name' | filter:nameSearch">
+                    <td>
+                        {{student.name}}
+                    </td>
+                    <td ng-repeat="gr in student.grade track by $index">
+                        {{gr}}
+                    </td>
+                    <td>
+                        {{avg(student.grade) | currency}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <h1 ng-bind="displayCristTask('Rocha')"></h1>
+        <h3>{{displayCristTask('Rocha2')}}</h3>
+        </div>
+    </div>
+</body>
+<script>
+    let angularApp = angular.module('firstApp',[]);
+    angularApp.controller('repeatCtrl',($scope)=>{
+        $scope.name = "Crist";
+        $scope.task = "Looking at his phone most often!";
+        $scope.students = [
+            {name:'Juan',grade:[60,70,90]},
+            {name:'Jose',grade:[80,80,40]},
+            {name:'Akane',grade:[40,70,80]}
+        ];
+        $scope.avg = (grades)=>{
+            
+            let sum = 0;
+            for(grade of grades){
+                sum += grade;
+            };
+            return (sum/grades.length).toFixed(2);
+        }
+        $scope.displayCristTask = (lastname)=>{
+            return $scope.name + ' ' + $scope.task + ' ' +lastname;
+        }
+    })
+    
+</script>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./angular.js"></script>
+</head>
+<body>
+    <div ng-app="app" ng-controller="ctrl1">
+        <h2 ng-bind="msg"></h2>
+        <h3 ng-bind="clock"></h3>
+        <select ng-model="selectedDep">
+            <option ng-repeat="dep in department" value="{{dep.addr}}">{{dep.depName}}</option>
+        </select>
+        <select ng-model="selectedDep" ng-options="dep.depName for dep in department"></select>
+        <h3 ng-bind="selectedDep.addr"></h3>
+        <div ng-repeat="dep in department">
+            <h2>Department Name:{{dep.depName}}</h2>
+            <h5>Address: {{dep.addr}}</h5>
+        </div>
+    </div>
+</body>
+<script>
+    let app = angular.module('app',[]);
+    app.controller('ctrl1',($scope,$timeout,$interval)=>{
+        $scope.msg = "Welcome";
+        $scope.department = [
+            {depName:'Sell',addr:'West End'},
+            {depName:'IT',addr:'West End'},
+            {depName:'Finanace',addr:'North Vancouver'},
+            {depName:'Customer Relation',addr:'West Vancouver'}
+        ]
+        $timeout(()=>{
+            $scope.msg = "Welcome Linwen!";
+        },3000);
+        $scope.clock = new Date().toLocaleString();
+        $interval(()=>{
+            $scope.clock = new Date().toLocaleString();
+        },1000);
+    })
+</script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.8/dist/vue.js"></script>
+</head>
+<body>
+    <div id="firstVue">
+        <button v-on:click="chCompo()">change component</button>
+        <component v-bind:is="compoName"></component>
+    </div>
+    <div id="secondVue">
+        <second-compo></second-compo>
+        <namecompo></namecompo>
+    </div>
+</body>
+<script>
+    Vue.component('firstCompo',{
+        template:"<h2 v-on:mouseover='chName()' v-on:mouseout='originName()'>The name is <i>{{name}}</i></h2>",
+        data: function(){
+            return{
+                name:"Edmond"
+            }
+        },
+        methods:{
+            chName:function(){
+                this.name = "Patterson"
+            },
+            originName:function(){
+                this.name = "Edmond"
+            }
+        }
+    });
+    Vue.component('secondCompo',{
+        template:"<h5 v-on:mouseover='chName()' v-on:mouseout='originName()'>The name is <i>{{name}}</i></h5>",
+        data: function(){
+            return{
+                name:"Edmond"
+            }
+        },
+        methods:{
+            chName:function(){
+                this.name = "Patterson"
+            },
+            originName:function(){
+                this.name = "Edmond"
+            }
+        }
+    });
+    let firstVue = new Vue({
+        el:'#firstVue',
+        data:{
+            compoName:'secondCompo'
+        },
+        methods:{
+            chCompo:function(){
+                this.compoName = 'firstCompo'
+            }
+        }
+    })
+    let secondVue = new Vue({
+        el:'#secondVue',
+        data:{
+            firstName:"Crist"
+        },
+        components:{
+            'secondcompoInternal':{
+                template:'<h2>test</h2>'
+            },
+            'namecompo':{
+                template:'<h2>I am the other Component</h2>'
+            }
+        }
+    })
+</script>
+</html>
