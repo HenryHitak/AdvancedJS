@@ -16,7 +16,7 @@
         :key="idx" 
         :name="idx"
         v-on:childevent="childClick">
-        <!-- v-bind를 사용하는 콜론:  / event trigger v-on //childevent는 shCourse function에 있는 기능으로 emit를 하여 child에서 parents로 value를 보낸다-->
+        <!-- v-bind를 사용하는 콜론:  / event trigger v-on //childevent는 shCourse function에 있는 기능으로 emit를 하여 child에서 parents로 value를 보낸다 / custom event is to talk from child to parent-->
 
         </course-button>
         
@@ -25,10 +25,10 @@
 <script>
     Vue.component('courseButton',{
         template:'<button @click="shCourse(courseName)">{{courseName}} {{name}}</button>',
-        props:['courseName','name'], //connects child to parents
+        props:['courseName','name'], //connects child to parents (talking from parent to child)
         methods:{
             shCourse:function(cName){
-                this.$emit('childevent',cName,"henry");
+                this.$emit('childevent',cName,"H");
             }
         }
     })

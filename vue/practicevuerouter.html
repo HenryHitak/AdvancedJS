@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+<body >
+    <div id="routerApp">
+        <header>
+            <nav>
+                <router-link :to="{path:'/route1',query:{name:'Henry', last:'Lee'}}" active-class="_active">Route 1 Link</router-link>
+                <router-link :to="{path:'/route2',query:{foodname:'Tacos', restname:'Franc'}}">Route 2 Link</router-link>
+                <!-- <router-link to="/route2" active-class="_active">Route 2 Link</router-link> -->
+                <router-link :to="{path:'/route1'}" tag="button" event="mouseover">Route 1</router-link>
+            </nav>
+        </header>
+        <main>
+            <router-view></router-view>
+        </main>
+        <footer>
+            This is just a footer
+        </footer>
+    </div>
+</body>
+<script>
+    let Route1page = {
+        template:'<h1>this is route 1 page {{fname}} {{lname}}</h1>',
+        data(){
+            return{
+                fname:'',
+                lname:''
+            }
+        },
+        mounted(){
+            this.fname=this.$route.query.name;
+            this.lname=this.$route.query.last;
+        }
+    };
+    let Route2page = {
+        template:'<h1>My favourite food is {{food}} & my favourite restaurant is {{rest}}</h1>',
+        props:['food','rest']
+    };
+    const routes = [
+        {
+            path:'/route1',
+            component: Route1page
+        },
+        {
+            path:'/route2',
+            component: Route2page,
+            props:(route)=>({
+                food:route.query.foodname,
+                rest:route.query.restname
+            })
+        }
+    ];
+    
+    const router = new VueRouter({
+        routes
+    });
+    let routerApp = new Vue({
+        el: '#routerApp',
+        router
+    })
+</script>
+</html>
+<!-- <body>
+    <div  id="myApp">
+        <header>
+            <nav>
+                <router-link to="/fname">Name</router-link>
+                <router-link to="/country">Country</router-link>
+                <router-link to="/favfood">Food</router-link>
+            </nav>
+        </header>
+        <main>
+            <router-view></router-view>
+        </main>
+        
+    </div>
+</body> -->
+<!-- <script>
+    let Route1page ={
+
+    }
+    let firstpg ={
+        template:'<h1>My name is Hitak Lee</h1>'
+    }
+    let secondpg = {
+        template:'<h1>I am from Korea</h1>'
+    }
+    let thirdpg = {
+        template:'<h1>My favourite food is Tacos</h1>'
+    }
+    let routes = [
+        {
+            path:'/fname',
+            component:firstpg
+        },
+        {
+            path:'/country',
+            component:secondpg
+        },
+        {
+            path:'/favfood',
+            component:thirdpg
+        }
+    ]
+    const router= new VueRouter ({
+        routes
+    })
+    let myApp = new Vue ({
+        el:'#myApp',
+        // data:{
+        //     information:[
+        //       name='Hitak Lee',
+        //       country='Korea',
+                          
+        //     ]
+        // },
+        router
+    })
+</script> -->
